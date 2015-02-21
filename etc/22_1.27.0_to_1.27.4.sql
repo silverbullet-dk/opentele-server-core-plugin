@@ -1,0 +1,4 @@
+ALTER TABLE patient_overview ADD questionnaire_severity_ordinal INT
+GO
+DELETE FROM patient_overview
+GO
