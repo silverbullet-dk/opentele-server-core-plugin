@@ -19,7 +19,6 @@ grails.project.dependency.resolution = {
     checksums true // Whether to verify checksums on resolve
 
     def gebVersion = "0.10.0"
-    def seleniumVersion = "2.33.0"
 
     repositories {
         grailsCentral()
@@ -45,23 +44,28 @@ grails.project.dependency.resolution = {
         test "org.gebish:geb-junit4:$gebVersion"
 
         compile 'cglib:cglib:3.1'
+
+        compile 'commons-collections:commons-collections:3.2.1'
     }
 
     plugins {
         runtime ":build-test-data:2.2.2"
 
-        build(":tomcat:8.0.15",
+        build(":tomcat:7.0.54",
               ":release:3.0.1",
               ":rest-client-builder:2.0.3") {
             export = false
         }
+        compile ":tomcat:7.0.54"
 
         runtime ":database-migration:1.4.0"
 
-        runtime ":kih-auditlog:1.0"
+        runtime ":kih-auditlog:1.1"
 
-        test ":hibernate:3.6.10.18"
-        runtime ":hibernate:3.6.10.18"
+        test ":hibernate4:4.3.5.5"
+        //test ":hibernate:3.6.10.18"
+        //runtime ":hibernate:3.6.10.18"
+        runtime ":hibernate4:4.3.5.5"
 
         runtime ":spring-security-core:2.0-RC4"
 

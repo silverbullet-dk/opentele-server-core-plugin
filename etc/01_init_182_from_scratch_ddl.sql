@@ -27,7 +27,7 @@ INSERT INTO [dbo].[DATABASECHANGELOG] ([AUTHOR], [COMMENTS], [DATEEXECUTED], [DE
 GO
 
 -- Changeset 1_0_baseline.groovy::1361794626972-2::henrik (generated)::(Checksum: 3:e6612fd3425107065f74d039417912db)
-CREATE TABLE [dbo].[audit_log_entry] ([id] BIGINT IDENTITY NOT NULL, [version] BIGINT NOT NULL, [action_id] BIGINT, [authority] NVARCHAR(1024), [calling_ip] NVARCHAR(1024), [correlation_id] NVARCHAR(1024), [created_by] NVARCHAR(1024), [created_date] datetime2(7), [duration] BIGINT, [end_date] datetime2(7), [end_time] BIGINT, [exception] bit NOT NULL, [exception_message] NVARCHAR(1024), [http_session_id] NVARCHAR(1024), [id_card] NVARCHAR(1024), [message_id] NVARCHAR(1024), [modified_by] NVARCHAR(1024), [modified_date] datetime2(7), [operation] NVARCHAR(1024), [patient_cpr] NVARCHAR(1024), [request] NVARCHAR(1024), [response] NVARCHAR(1024), [result] NVARCHAR(1024), [service] NVARCHAR(1024), [start_date] datetime2(7), [start_time] BIGINT, [success] bit NOT NULL, CONSTRAINT [audit_log_entPK] PRIMARY KEY ([id]))
+CREATE TABLE [dbo].[audit_log_entry] ([id] BIGINT IDENTITY NOT NULL, [version] BIGINT NOT NULL, [action_id] BIGINT, [authority] NVARCHAR(1024), [calling_ip] NVARCHAR(1024), [correlation_id] NVARCHAR(1024), [created_by] NVARCHAR(1024), [created_date] datetime2(7), [duration] BIGINT, [end_date] datetime2(7), [end_time] BIGINT, [exception] bit NOT NULL, [exception_message] NVARCHAR(1024), [http_session_id] NVARCHAR(1024), [id_card] NVARCHAR(1024), [message_id] NVARCHAR(1024), [modified_by] NVARCHAR(1024), [modified_date] datetime2(7), [operation] NVARCHAR(1024), [patient_cpr] NVARCHAR(128), [request] NVARCHAR(1024), [response] NVARCHAR(1024), [result] NVARCHAR(1024), [service] NVARCHAR(1024), [start_date] datetime2(7), [start_time] BIGINT, [success] bit NOT NULL, CONSTRAINT [audit_log_entPK] PRIMARY KEY ([id]))
 GO
 
 INSERT INTO [dbo].[DATABASECHANGELOG] ([AUTHOR], [COMMENTS], [DATEEXECUTED], [DESCRIPTION], [EXECTYPE], [FILENAME], [ID], [LIQUIBASE], [MD5SUM], [ORDEREXECUTED]) VALUES ('henrik (generated)', '', GETDATE(), 'Create Table', 'EXECUTED', '1_0_baseline.groovy', '1361794626972-2', '2.0.5', '3:e6612fd3425107065f74d039417912db', 2)
@@ -125,7 +125,7 @@ INSERT INTO [dbo].[DATABASECHANGELOG] ([AUTHOR], [COMMENTS], [DATEEXECUTED], [DE
 GO
 
 -- Changeset 1_0_baseline.groovy::1361794626972-16::henrik (generated)::(Checksum: 3:c50cbf72b0163b8c2529e311e189d038)
-CREATE TABLE [dbo].[monitor_kit] ([id] BIGINT IDENTITY NOT NULL, [version] BIGINT NOT NULL, [created_by] NVARCHAR(1024), [created_date] datetime2(7), [department_id] BIGINT NOT NULL, [modified_by] NVARCHAR(1024), [modified_date] datetime2(7), [name] NVARCHAR(1024) NOT NULL, [patient_id] BIGINT, CONSTRAINT [monitor_kitPK] PRIMARY KEY ([id]))
+CREATE TABLE [dbo].[monitor_kit] ([id] BIGINT IDENTITY NOT NULL, [version] BIGINT NOT NULL, [created_by] NVARCHAR(1024), [created_date] datetime2(7), [department_id] BIGINT NOT NULL, [modified_by] NVARCHAR(1024), [modified_date] datetime2(7), [name] NVARCHAR(128) NOT NULL, [patient_id] BIGINT, CONSTRAINT [monitor_kitPK] PRIMARY KEY ([id]))
 GO
 
 INSERT INTO [dbo].[DATABASECHANGELOG] ([AUTHOR], [COMMENTS], [DATEEXECUTED], [DESCRIPTION], [EXECTYPE], [FILENAME], [ID], [LIQUIBASE], [MD5SUM], [ORDEREXECUTED]) VALUES ('henrik (generated)', '', GETDATE(), 'Create Table', 'EXECUTED', '1_0_baseline.groovy', '1361794626972-16', '2.0.5', '3:c50cbf72b0163b8c2529e311e189d038', 16)
@@ -188,7 +188,7 @@ INSERT INTO [dbo].[DATABASECHANGELOG] ([AUTHOR], [COMMENTS], [DATEEXECUTED], [DE
 GO
 
 -- Changeset 1_0_baseline.groovy::1361794626972-25::henrik (generated)::(Checksum: 3:cae0891f2a7f1708db2c7fddc405a326)
-CREATE TABLE [dbo].[patient_group] ([id] BIGINT IDENTITY NOT NULL, [version] BIGINT NOT NULL, [created_by] NVARCHAR(1024), [created_date] datetime2(7), [department_id] BIGINT NOT NULL, [modified_by] NVARCHAR(1024), [modified_date] datetime2(7), [name] NVARCHAR(1024) NOT NULL, [standard_threshold_set_id] BIGINT NOT NULL, CONSTRAINT [patient_groupPK] PRIMARY KEY ([id]))
+CREATE TABLE [dbo].[patient_group] ([id] BIGINT IDENTITY NOT NULL, [version] BIGINT NOT NULL, [created_by] NVARCHAR(1024), [created_date] datetime2(7), [department_id] BIGINT NOT NULL, [modified_by] NVARCHAR(1024), [modified_date] datetime2(7), [name] NVARCHAR(128) NOT NULL, [standard_threshold_set_id] BIGINT NOT NULL, CONSTRAINT [patient_groupPK] PRIMARY KEY ([id]))
 GO
 
 INSERT INTO [dbo].[DATABASECHANGELOG] ([AUTHOR], [COMMENTS], [DATEEXECUTED], [DESCRIPTION], [EXECTYPE], [FILENAME], [ID], [LIQUIBASE], [MD5SUM], [ORDEREXECUTED]) VALUES ('henrik (generated)', '', GETDATE(), 'Create Table', 'EXECUTED', '1_0_baseline.groovy', '1361794626972-25', '2.0.5', '3:cae0891f2a7f1708db2c7fddc405a326', 25)
@@ -209,7 +209,7 @@ INSERT INTO [dbo].[DATABASECHANGELOG] ([AUTHOR], [COMMENTS], [DATEEXECUTED], [DE
 GO
 
 -- Changeset 1_0_baseline.groovy::1361794626972-28::henrik (generated)::(Checksum: 3:09b88a584e5dfe5707d6a808ea367e9c)
-CREATE TABLE [dbo].[patient_questionnaire] ([id] BIGINT IDENTITY NOT NULL, [version] BIGINT NOT NULL, [created_by] NVARCHAR(1024), [created_date] datetime2(7), [creation_date] datetime2(7) NOT NULL, [creator_id] BIGINT NOT NULL, [deleted] bit NOT NULL, [modified_by] NVARCHAR(1024), [modified_date] datetime2(7), [monitoring_plan_id] BIGINT, [name] NVARCHAR(1024) NOT NULL, [patient_id] BIGINT NOT NULL, [revision] NVARCHAR(1024) NOT NULL, [start_node_id] BIGINT, [template_questionnaire_id] BIGINT NOT NULL, CONSTRAINT [patient_questPK] PRIMARY KEY ([id]))
+CREATE TABLE [dbo].[patient_questionnaire] ([id] BIGINT IDENTITY NOT NULL, [version] BIGINT NOT NULL, [created_by] NVARCHAR(1024), [created_date] datetime2(7), [creation_date] datetime2(7) NOT NULL, [creator_id] BIGINT NOT NULL, [deleted] bit NOT NULL, [modified_by] NVARCHAR(1024), [modified_date] datetime2(7), [monitoring_plan_id] BIGINT, [name] NVARCHAR(128) NOT NULL, [patient_id] BIGINT NOT NULL, [revision] NVARCHAR(128) NOT NULL, [start_node_id] BIGINT, [template_questionnaire_id] BIGINT NOT NULL, CONSTRAINT [patient_questPK] PRIMARY KEY ([id]))
 GO
 
 INSERT INTO [dbo].[DATABASECHANGELOG] ([AUTHOR], [COMMENTS], [DATEEXECUTED], [DESCRIPTION], [EXECTYPE], [FILENAME], [ID], [LIQUIBASE], [MD5SUM], [ORDEREXECUTED]) VALUES ('henrik (generated)', '', GETDATE(), 'Create Table', 'EXECUTED', '1_0_baseline.groovy', '1361794626972-28', '2.0.5', '3:09b88a584e5dfe5707d6a808ea367e9c', 28)

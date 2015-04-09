@@ -18,7 +18,7 @@ class HelpImageUtil {
         def uploadDir = new File(grailsApplication.config.help.image.uploadPath)
         if (!uploadDir.exists())
             uploadDir.mkdir()
-        return grailsApplication.config.help.image.uploadPath + "/"
+        return uploadDir.absolutePath
     }
 
     public static HelpImage ensureHelpImageExists(String filename) {

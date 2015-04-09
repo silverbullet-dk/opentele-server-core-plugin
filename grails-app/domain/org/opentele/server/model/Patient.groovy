@@ -77,23 +77,17 @@ class Patient extends AbstractObject {
 
     }
 
-    String getFormattedCpr() {
-        "${cpr[0..5]}-${cpr[6..9]}"
-    }
-
-    static transients = ['formattedCpr', 'name', 'latestQuestionnaireUploadDate', 'numberOfUnreadMessages', 'groups', 'patientOverview', 'shouldShowGestationalAge', 'stateWithPassiveIntervals', 'shortComment']
+    static transients = ['name', 'latestQuestionnaireUploadDate', 'numberOfUnreadMessages', 'groups', 'patientOverview', 'shouldShowGestationalAge', 'stateWithPassiveIntervals', 'shortComment']
 
     static constraints = {
-        cpr(validator: { val, obj ->
+        cpr(validator: { val, obj, errors ->
             def similarUser = Patient.findByCprIlike(val)
             if (similarUser && obj?.id != similarUser?.id) {
-                ["validate.patient.cpr.exists", "CPR"]
-            }
-            if (val?.length() != 10) {
-                ["validate.patient.cpr.length", "CPR"]
-            }
-            if (!val) {
-                ["validate.patient.default.blank", "CPR"]
+                errors.rejectValue('cpr', "validate.patient.cpr.exists")
+            } else if (obj.respondsTo('validateIdentification')) {
+                return obj.validateIdentification(val, obj, errors)
+            } else {
+                return true
             }
         })
 

@@ -46,6 +46,20 @@ class BloodPressureThresholdSpec extends Specification {
     }
 
     @Unroll
+    def "a BloodPressureThreshold can have its values overridden with the empty string"() {
+        given:
+        def threshold = new BloodPressureThreshold(type: type,
+                diastolicAlertHigh: 140, diastolicWarningHigh: 120, diastolicWarningLow: 60, diastolicAlertLow: 50,
+                systolicAlertHigh: 120, systolicWarningHigh: 100, systolicWarningLow: 50, systolicAlertLow: 40)
+
+        when:
+        threshold.properties = ['diastolicWarningHigh':""]
+
+        then:
+        threshold.diastolicWarningHigh == null
+    }
+
+    @Unroll
     def "when a BloodPressureThreshold diastolic contains invalid data, it cannot validate"() {
         given:
         def threshold = new BloodPressureThreshold(type: type,

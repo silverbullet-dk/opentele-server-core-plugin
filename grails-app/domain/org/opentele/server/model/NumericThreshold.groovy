@@ -1,5 +1,9 @@
 package org.opentele.server.model
 
+import org.grails.databinding.BindUsing
+import org.opentele.server.core.util.FloatBindingHelper
+
+@BindUsing(FloatBindingHelper)
 class NumericThreshold extends Threshold {
     Float alertHigh
     Float warningHigh

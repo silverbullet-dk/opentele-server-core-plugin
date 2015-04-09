@@ -122,5 +122,9 @@ databaseChangeLog = {
 
 	include file: '1_31_0_update.groovy'
 
+    include file: '2_0_2_update.groovy'
+
+    include file: '2_0_3_update.groovy'
+
 }
 

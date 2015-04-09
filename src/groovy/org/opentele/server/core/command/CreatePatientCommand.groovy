@@ -52,10 +52,6 @@ class CreatePatientCommand extends AbstractObject {
         phone = params.phone
         mobilePhone = params.mobilePhone
         email = params.email
-
-        //Fix CPR if needed
-        cpr = cpr?.replaceAll(" ", "")
-        cpr = cpr?.replaceAll("-", "")
     }
 
     def setAuthentication(def username, def cleartextPassword) {
@@ -64,6 +60,11 @@ class CreatePatientCommand extends AbstractObject {
     }
 
     def setPatientGroups(String[] groupIds) {
+
+        if (this.groupIds != null && this.groupIds == groupIds) {
+            return
+        }
+
         this.groupIds = []
         this.thresholds = [] as Set<Threshold>
 
@@ -137,14 +138,12 @@ class CreatePatientCommand extends AbstractObject {
         postalCode(blank: false)
         city(blank: false)
 
-        cpr(validator: { val, obj ->
+        cpr(validator: { val, obj, errors ->
             def similarPatient = Patient.findAllByCpr(val)
             if (similarPatient && similarPatient.size() > 0) {
-                ["validate.patient.cpr.exists"]
-            } else if (val?.length() != 10) {
-                ["validate.patient.cpr.length", "CPR"]
-            } else if (!val) {
-                ["validate.patient.default.blank", "CPR"]
+                errors.rejectValue('cpr', "validate.patient.cpr.exists")
+            } else if (obj.respondsTo('validateIdentification')) {
+                return obj.validateIdentification(val, obj, errors)
             } else {
                 return true
             }

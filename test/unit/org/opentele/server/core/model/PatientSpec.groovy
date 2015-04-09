@@ -2,6 +2,7 @@ package org.opentele.server.core.model
 
 import grails.buildtestdata.mixin.Build
 import grails.test.mixin.TestFor
+import org.opentele.server.core.model.types.Sex
 import org.opentele.server.model.Measurement
 import org.opentele.server.model.MeasurementType
 import org.opentele.server.model.PassiveInterval
@@ -18,7 +19,6 @@ class PatientSpec extends Specification {
     def setup() {
         patient = Patient.build()
     }
-
 
     def "test that getLatestQuestionnaireUploadDate works as expected"() {
         setup:
@@ -82,5 +82,36 @@ class PatientSpec extends Specification {
         new GregorianCalendar(2014, Calendar.FEBRUARY, 4        ).getTime() | new GregorianCalendar(2014, Calendar.JANUARY  , 13).getTime() | ""
         new GregorianCalendar(2014, Calendar.FEBRUARY, 4        ).getTime() | new GregorianCalendar(2014, Calendar.NOVEMBER , 10).getTime() | ""
         new GregorianCalendar(2014, Calendar.FEBRUARY, 4        ).getTime() | new GregorianCalendar(2015, Calendar.NOVEMBER , 11).getTime() | ""
+    }
+
+    def "calls identification validation mixin if set" () {
+        given:
+        def mixinUsed = false
+        TestIdentificationMixin.callback = { mixinUsed = true }
+        Patient.mixin(TestIdentificationMixin)
+        Patient toValidate = createValidPatient()
+
+        when:
+        toValidate.validate()
+
+        then:
+        mixinUsed == true
+    }
+
+    private Patient createValidPatient() {
+        def toValidate = new Patient(firstName: 'bla', lastName: 'morebla', address: 'bla', postalCode: '8888', city: 'bla', sex: Sex.MALE, cpr: '1234567890')
+        toValidate
+    }
+}
+
+class TestIdentificationMixin {
+
+    def static callback
+
+    def validateIdentification(val, obj, errors) {
+        if (callback) {
+            callback()
+        }
+        callback = null
     }
 }

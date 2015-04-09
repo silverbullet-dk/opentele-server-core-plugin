@@ -19,7 +19,8 @@ class ScheduleCommand implements Schedule {
 
     Schedule.ScheduleType type = Schedule.ScheduleType.UNSCHEDULED
     @BindUsing({
-        obj, source -> source['timesOfDay']
+        obj, source ->
+            source['timesOfDay'].size() > 0 ? source['timesOfDay'] : obj.timesOfDay
     })
     List<Schedule.TimeOfDay> timesOfDay = [new Schedule.TimeOfDay(hour: 10, minute: 0)]
 

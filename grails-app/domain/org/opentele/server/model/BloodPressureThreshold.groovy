@@ -1,5 +1,9 @@
 package org.opentele.server.model
 
+import org.grails.databinding.BindUsing
+import org.opentele.server.core.util.FloatBindingHelper
+
+@BindUsing(FloatBindingHelper)
 class BloodPressureThreshold extends Threshold {
     Float diastolicAlertHigh
     Float diastolicWarningHigh

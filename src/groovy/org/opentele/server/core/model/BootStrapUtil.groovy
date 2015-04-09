@@ -1,5 +1,6 @@
 package org.opentele.server.core.model
 
+import groovy.sql.Sql
 import org.opentele.server.model.BloodPressureThreshold
 import org.opentele.server.model.Department
 import org.opentele.server.model.MeasurementType
@@ -348,6 +349,21 @@ class BootStrapUtil {
                 return [
                     PermissionName.PATIENT_READ_ALL_IN_SYSTEM
                 ]
+        }
+    }
+
+    static boolean isH2DatabaseServerRunning(def databaseUrl, def username, def password) {
+        Sql sql;
+        try {
+            sql = Sql.newInstance(databaseUrl, username, password, "org.h2.Driver")
+            return true
+        } catch (Exception e) {
+            return false
+        }
+        finally {
+            if(sql) {
+                sql.close()
+            }
         }
     }
 }

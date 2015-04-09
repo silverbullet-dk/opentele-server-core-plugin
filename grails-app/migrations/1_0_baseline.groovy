@@ -80,7 +80,7 @@ databaseChangeLog = {
 
             column(name: "operation", type: '${string.type}')
 
-            column(name: "patient_cpr", type: '${string.type}')
+            column(name: "patient_cpr", type: '${string128.type}')
 
             column(name: "request", type: '${string.type}')
 
@@ -594,7 +594,7 @@ databaseChangeLog = {
 
             column(name: "modified_date", type: '${datetime.type}')
 
-            column(name: "name", type: '${string.type}') {
+            column(name: "name", type: '${string128.type}') {
                 constraints(nullable: "false")
             }
 
@@ -776,7 +776,7 @@ databaseChangeLog = {
 
             column(name: "comment", type: '${string2048.type}')
 
-            column(name: "cpr", type: '${string.type}') {
+            column(name: "cpr", type: '${string128.type}') {
                 constraints(nullable: "false")
             }
 
@@ -910,7 +910,7 @@ databaseChangeLog = {
 
             column(name: "modified_date", type: '${datetime.type}')
 
-            column(name: "name", type: '${string.type}') {
+            column(name: "name", type: '${string128.type}') {
                 constraints(nullable: "false")
             }
 
@@ -998,7 +998,7 @@ databaseChangeLog = {
 
             column(name: "monitoring_plan_id", type: '${id.type}')
 
-            column(name: "name", type: '${string.type}') {
+            column(name: "name", type: '${string128.type}') {
                 constraints(nullable: "false")
             }
 
@@ -1006,7 +1006,7 @@ databaseChangeLog = {
                 constraints(nullable: "false")
             }
 
-            column(name: "revision", type: '${string.type}') {
+            column(name: "revision", type: '${string128.type}') {
                 constraints(nullable: "false")
             }
 

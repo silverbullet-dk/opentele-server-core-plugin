@@ -18,8 +18,11 @@ class AddQuestionnaireGroup2MonitoringPlanCommand {
 
     List<QuestionnaireGroup2HeaderCommand> addedQuestionnaireGroup2Headers() {
         questionnaireGroup2Headers.collect {
-            new QuestionnaireGroup2HeaderCommand(questionnaireGroup2Header: QuestionnaireGroup2QuestionnaireHeader.get(it.key),
-                                                 useStandard: it.value.useStandard, addQuestionnaire: it.value.addQuestionnaire)
+            def group2Header = QuestionnaireGroup2QuestionnaireHeader.get(it.key)
+            def useStandard = it.value.useStandard
+            def addQuestionnaire = it.value.addQuestionnaire ? it.value.addQuestionnaire : false
+            new QuestionnaireGroup2HeaderCommand(questionnaireGroup2Header: group2Header,
+                                                 useStandard: useStandard, addQuestionnaire: addQuestionnaire)
         }
     }
 
